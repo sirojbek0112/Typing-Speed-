@@ -1,735 +1,259 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="uz" data-theme="dark">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <meta
-        name="description"
-        content="Typing Speed - Professional typing speed test with WPM, accuracy and statistics."
-    >
-
-    <title>Typing Speed — Typing Test</title>
-
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover, interactive-widget=resizes-content">
+<meta name="theme-color" content="#070b16">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="format-detection" content="telephone=no">
+<meta name="description" content="Professional Typing Speed Test — WPM, accuracy va xatolarni real vaqtda o'lchang.">
+<title>Typing Speed — Professional Typing Test</title>
+<link rel="stylesheet" href="style.css">
+<script>
+  (function () {
+    try {
+      var raw = localStorage.getItem('typingSpeed.settings.v1');
+      if (raw) {
+        var s = JSON.parse(raw);
+        if (s && s.theme) document.documentElement.setAttribute('data-theme', s.theme);
+      }
+    } catch (e) {}
+  })();
+</script>
 </head>
-
 <body>
 
-    <!-- Background -->
-    <div class="background-orb orb-one"></div>
-    <div class="background-orb orb-two"></div>
-
-    <!-- Header -->
-    <header class="header">
-        <div class="container header-inner">
-
-            <a href="#home" class="logo" data-section="home">
-                <span class="logo-icon">⌨</span>
-                <span>Typing<span class="logo-accent">Speed</span></span>
-            </a>
-
-            <nav class="nav">
-                <button class="nav-link active" data-section="home">
-                    Home
-                </button>
-
-                <button class="nav-link" data-section="practice">
-                    Practice
-                </button>
-
-                <button class="nav-link" data-section="statistics">
-                    Statistics
-                </button>
-
-                <button class="nav-link" data-section="settings">
-                    Settings
-                </button>
-            </nav>
-
-            <button
-                class="mobile-menu-btn"
-                id="mobileMenuBtn"
-                aria-label="Open menu"
-            >
-                ☰
-            </button>
-
-        </div>
-    </header>
-
-    <!-- Main -->
-    <main>
-
-        <!-- HOME -->
-        <section id="home" class="page-section active-section">
-
-            <div class="container hero">
-
-                <div class="hero-badge">
-                    <span class="pulse-dot"></span>
-                    Real-time typing test
-                </div>
-
-                <h1>
-                    Test Your
-                    <span class="gradient-text">Typing Speed</span>
-                </h1>
-
-                <p class="hero-subtitle">
-                    Improve your typing speed, accuracy and consistency
-                    with a professional typing experience.
-                </p>
-
-                <div class="best-preview">
-                    <div class="best-item">
-                        <span class="best-label">Personal Best</span>
-                        <strong id="homeBestWpm">0</strong>
-                        <small>WPM</small>
-                    </div>
-
-                    <div class="best-divider"></div>
-
-                    <div class="best-item">
-                        <span class="best-label">Tests Completed</span>
-                        <strong id="homeTests">0</strong>
-                        <small>Tests</small>
-                    </div>
-                </div>
-
-                <!-- Setup Card -->
-                <div class="setup-card">
-
-                    <div class="setup-title">
-                        <div>
-                            <span class="eyebrow">GET STARTED</span>
-                            <h2>Configure Your Test</h2>
-                        </div>
-
-                        <div class="keyboard-icon">⌨️</div>
-                    </div>
-
-                    <div class="option-group">
-
-                        <label>Time</label>
-
-                        <div class="option-buttons" id="timeOptions">
-
-                            <button class="option-btn" data-time="15">
-                                <strong>15</strong>
-                                <span>sec</span>
-                            </button>
-
-                            <button class="option-btn active" data-time="30">
-                                <strong>30</strong>
-                                <span>sec</span>
-                            </button>
-
-                            <button class="option-btn" data-time="60">
-                                <strong>60</strong>
-                                <span>sec</span>
-                            </button>
-
-                        </div>
-
-                    </div>
-
-                    <div class="option-group">
-
-                        <label>Difficulty</label>
-
-                        <div class="option-buttons difficulty-options">
-
-                            <button class="option-btn difficulty-btn active" data-difficulty="easy">
-                                <span class="difficulty-dot easy-dot"></span>
-                                Easy
-                            </button>
-
-                            <button class="option-btn difficulty-btn" data-difficulty="medium">
-                                <span class="difficulty-dot medium-dot"></span>
-                                Medium
-                            </button>
-
-                            <button class="option-btn difficulty-btn" data-difficulty="hard">
-                                <span class="difficulty-dot hard-dot"></span>
-                                Hard
-                            </button>
-
-                        </div>
-
-                    </div>
-
-                    <button class="primary-btn start-btn" id="startBtn">
-                        <span>Start Test</span>
-                        <span class="btn-arrow">→</span>
-                    </button>
-
-                    <div class="keyboard-hints">
-                        <span>
-                            <kbd>Tab</kbd> Focus input
-                        </span>
-                        <span>
-                            <kbd>Esc</kbd> Stop test
-                        </span>
-                        <span>
-                            <kbd>Space</kbd> Pause
-                        </span>
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- PRACTICE -->
-        <section id="practice" class="page-section">
-
-            <div class="container practice-container">
-
-                <div class="section-heading">
-                    <span class="eyebrow">PRACTICE</span>
-                    <h2>Typing Test</h2>
-                    <p>Type the text below as quickly and accurately as possible.</p>
-                </div>
-
-                <!-- Live Stats -->
-                <div class="stats-grid">
-
-                    <div class="stat-card">
-                        <span class="stat-icon">⚡</span>
-                        <div>
-                            <span class="stat-label">WPM</span>
-                            <strong id="liveWpm">0</strong>
-                        </div>
-                    </div>
-
-                    <div class="stat-card">
-                        <span class="stat-icon">🎯</span>
-                        <div>
-                            <span class="stat-label">Accuracy</span>
-                            <strong id="liveAccuracy">100%</strong>
-                        </div>
-                    </div>
-
-                    <div class="stat-card">
-                        <span class="stat-icon">✕</span>
-                        <div>
-                            <span class="stat-label">Errors</span>
-                            <strong id="liveErrors">0</strong>
-                        </div>
-                    </div>
-
-                    <div class="stat-card timer-card">
-                        <span class="stat-icon">⏱</span>
-                        <div>
-                            <span class="stat-label">Time</span>
-                            <strong id="liveTime">30s</strong>
-                        </div>
-                    </div>
-
-                </div>
-
-                <!-- Test Card -->
-                <div class="typing-card">
-
-                    <div class="typing-card-top">
-
-                        <div>
-                            <span class="test-difficulty" id="testDifficulty">
-                                EASY
-                            </span>
-
-                            <span class="test-duration" id="testDuration">
-                                30 seconds
-                            </span>
-                        </div>
-
-                        <div class="test-actions">
-
-                            <button
-                                class="icon-btn"
-                                id="pauseBtn"
-                                title="Pause test"
-                                aria-label="Pause test"
-                            >
-                                ❚❚
-                            </button>
-
-                            <button
-                                class="icon-btn"
-                                id="restartBtn"
-                                title="Restart test"
-                                aria-label="Restart test"
-                            >
-                                ↻
-                            </button>
-
-                        </div>
-
-                    </div>
-
-                    <!-- Progress -->
-                    <div class="progress-area">
-
-                        <div class="progress-info">
-                            <span>Progress</span>
-                            <span id="progressText">0%</span>
-                        </div>
-
-                        <div class="progress-track">
-                            <div
-                                class="progress-bar"
-                                id="progressBar"
-                            ></div>
-                        </div>
-
-                    </div>
-
-                    <!-- Text -->
-                    <div
-                        class="typing-text"
-                        id="typingText"
-                        aria-label="Text to type"
-                    ></div>
-
-                    <!-- Input -->
-                    <div class="input-wrapper">
-
-                        <textarea
-                            id="typingInput"
-                            class="typing-input"
-                            autocomplete="off"
-                            autocorrect="off"
-                            autocapitalize="off"
-                            spellcheck="false"
-                            placeholder="Start typing here..."
-                            rows="3"
-                            disabled
-                        ></textarea>
-
-                        <div class="input-status" id="inputStatus">
-                            Click here and start typing
-                        </div>
-
-                    </div>
-
-                    <div class="test-footer">
-
-                        <div class="character-info">
-                            <span>
-                                Correct:
-                                <strong id="correctChars">0</strong>
-                            </span>
-
-                            <span>
-                                Typed:
-                                <strong id="typedChars">0</strong>
-                            </span>
-                        </div>
-
-                        <div class="shortcut-info">
-                            <kbd>Space</kbd>
-                            Pause
-                            <span>•</span>
-                            <kbd>Esc</kbd>
-                            Exit
-                        </div>
-
-                    </div>
-
-                    <!-- Pause Overlay -->
-                    <div class="pause-overlay" id="pauseOverlay">
-
-                        <div class="pause-content">
-                            <div class="pause-icon">Ⅱ</div>
-
-                            <h3>Test Paused</h3>
-
-                            <p>
-                                Take a breath. Continue when you're ready.
-                            </p>
-
-                            <button
-                                class="primary-btn"
-                                id="resumeBtn"
-                            >
-                                Resume Test
-                            </button>
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- STATISTICS -->
-        <section id="statistics" class="page-section">
-
-            <div class="container">
-
-                <div class="section-heading">
-                    <span class="eyebrow">YOUR PERFORMANCE</span>
-                    <h2>Statistics</h2>
-                    <p>
-                        Track your typing progress and performance history.
-                    </p>
-                </div>
-
-                <div class="statistics-grid">
-
-                    <div class="big-stat-card">
-                        <span class="big-stat-icon">⚡</span>
-                        <span>Best WPM</span>
-                        <strong id="statsBestWpm">0</strong>
-                        <small>Words per minute</small>
-                    </div>
-
-                    <div class="big-stat-card">
-                        <span class="big-stat-icon">📊</span>
-                        <span>Average WPM</span>
-                        <strong id="statsAverageWpm">0</strong>
-                        <small>Across all tests</small>
-                    </div>
-
-                    <div class="big-stat-card">
-                        <span class="big-stat-icon">🎯</span>
-                        <span>Best Accuracy</span>
-                        <strong id="statsBestAccuracy">0%</strong>
-                        <small>Highest accuracy</small>
-                    </div>
-
-                    <div class="big-stat-card">
-                        <span class="big-stat-icon">🏆</span>
-                        <span>Tests Completed</span>
-                        <strong id="statsTests">0</strong>
-                        <small>Completed tests</small>
-                    </div>
-
-                    <div class="big-stat-card">
-                        <span class="big-stat-icon">⌨️</span>
-                        <span>Total Characters</span>
-                        <strong id="statsCharacters">0</strong>
-                        <small>Characters typed</small>
-                    </div>
-
-                    <div class="big-stat-card">
-                        <span class="big-stat-icon">✕</span>
-                        <span>Total Errors</span>
-                        <strong id="statsErrors">0</strong>
-                        <small>Typing errors</small>
-                    </div>
-
-                </div>
-
-                <!-- History -->
-                <div class="history-card">
-
-                    <div class="history-header">
-                        <div>
-                            <span class="eyebrow">HISTORY</span>
-                            <h3>Recent Tests</h3>
-                        </div>
-
-                        <button
-                            class="danger-outline-btn"
-                            id="clearHistoryBtn"
-                        >
-                            Clear History
-                        </button>
-                    </div>
-
-                    <div class="table-wrapper">
-
-                        <table>
-
-                            <thead>
-                                <tr>
-                                    <th>Date</th>
-                                    <th>WPM</th>
-                                    <th>Accuracy</th>
-                                    <th>Errors</th>
-                                </tr>
-                            </thead>
-
-                            <tbody id="historyBody"></tbody>
-
-                        </table>
-
-                    </div>
-
-                    <div
-                        class="empty-history"
-                        id="emptyHistory"
-                    >
-                        <span>📈</span>
-                        <h4>No tests yet</h4>
-                        <p>
-                            Complete your first typing test to see your
-                            history here.
-                        </p>
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- SETTINGS -->
-        <section id="settings" class="page-section">
-
-            <div class="container settings-container">
-
-                <div class="section-heading">
-                    <span class="eyebrow">CUSTOMIZE</span>
-                    <h2>Settings</h2>
-                    <p>Customize your typing experience.</p>
-                </div>
-
-                <div class="settings-card">
-
-                    <!-- Theme -->
-                    <div class="setting-row">
-
-                        <div class="setting-info">
-                            <div class="setting-icon">🌙</div>
-
-                            <div>
-                                <h3>Theme</h3>
-                                <p>Choose between dark and light mode.</p>
-                            </div>
-                        </div>
-
-                        <div class="theme-switcher">
-
-                            <button
-                                class="theme-btn active"
-                                data-theme="dark"
-                            >
-                                🌙 Dark
-                            </button>
-
-                            <button
-                                class="theme-btn"
-                                data-theme="light"
-                            >
-                                ☀️ Light
-                            </button>
-
-                        </div>
-
-                    </div>
-
-                    <div class="setting-divider"></div>
-
-                    <!-- Sound -->
-                    <div class="setting-row">
-
-                        <div class="setting-info">
-                            <div class="setting-icon">🔊</div>
-
-                            <div>
-                                <h3>Typing Sound</h3>
-                                <p>
-                                    Play a subtle sound when typing.
-                                </p>
-                            </div>
-                        </div>
-
-                        <label class="toggle">
-
-                            <input
-                                type="checkbox"
-                                id="soundToggle"
-                                checked
-                            >
-
-                            <span class="toggle-slider"></span>
-
-                        </label>
-
-                    </div>
-
-                    <div class="setting-divider"></div>
-
-                    <!-- Keyboard Shortcuts -->
-                    <div class="setting-row shortcuts-row">
-
-                        <div class="setting-info">
-                            <div class="setting-icon">⌨️</div>
-
-                            <div>
-                                <h3>Keyboard Shortcuts</h3>
-                                <p>
-                                    Use shortcuts to control your test.
-                                </p>
-                            </div>
-                        </div>
-
-                        <div class="shortcut-list">
-                            <div>
-                                <kbd>Space</kbd>
-                                <span>Pause / Resume</span>
-                            </div>
-
-                            <div>
-                                <kbd>Esc</kbd>
-                                <span>Stop test</span>
-                            </div>
-
-                            <div>
-                                <kbd>Tab</kbd>
-                                <span>Focus typing input</span>
-                            </div>
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <div class="settings-danger">
-
-                    <div>
-                        <h3>Reset Statistics</h3>
-                        <p>
-                            Delete all saved typing statistics and history.
-                        </p>
-                    </div>
-
-                    <button
-                        class="danger-btn"
-                        id="resetStatsBtn"
-                    >
-                        Reset All Data
-                    </button>
-
-                </div>
-
-            </div>
-
-        </section>
-
-    </main>
-
-
-    <!-- Result Modal -->
-    <div
-        class="modal"
-        id="resultModal"
-        aria-hidden="true"
-    >
-
-        <div class="modal-backdrop"></div>
-
-        <div class="result-card">
-
-            <button
-                class="modal-close"
-                id="modalCloseBtn"
-                aria-label="Close"
-            >
-                ×
-            </button>
-
-            <div class="result-trophy" id="resultTrophy">
-                🏆
-            </div>
-
-            <div
-                class="new-record"
-                id="newRecord"
-            >
-                ★ NEW PERSONAL RECORD
-            </div>
-
-            <span class="eyebrow">TEST COMPLETE</span>
-
-            <h2>Your Result</h2>
-
-            <div class="result-main">
-                <strong id="resultWpm">0</strong>
-                <span>WPM</span>
-            </div>
-
-            <div class="result-grid">
-
-                <div>
-                    <span>Accuracy</span>
-                    <strong id="resultAccuracy">100%</strong>
-                </div>
-
-                <div>
-                    <span>Errors</span>
-                    <strong id="resultErrors">0</strong>
-                </div>
-
-                <div>
-                    <span>Correct Characters</span>
-                    <strong id="resultCorrect">0</strong>
-                </div>
-
-                <div>
-                    <span>Total Characters</span>
-                    <strong id="resultTotal">0</strong>
-                </div>
-
-                <div>
-                    <span>Time</span>
-                    <strong id="resultTime">30 sec</strong>
-                </div>
-
-                <div>
-                    <span>Difficulty</span>
-                    <strong id="resultDifficulty">Easy</strong>
-                </div>
-
-            </div>
-
-            <div class="result-actions">
-
-                <button
-                    class="secondary-btn"
-                    id="tryAgainBtn"
-                >
-                    ↻ Try Again
-                </button>
-
-                <button
-                    class="primary-btn"
-                    id="newTestBtn"
-                >
-                    New Test →
-                </button>
-
-                <button
-                    class="text-btn"
-                    id="backHomeBtn"
-                >
-                    Back to Home
-                </button>
-
-            </div>
-
-        </div>
-
+<div class="bg-decor" aria-hidden="true">
+  <span class="orb orb-1"></span>
+  <span class="orb orb-2"></span>
+  <span class="orb orb-3"></span>
+</div>
+
+<header class="header">
+  <div class="header-inner">
+    <a class="logo" id="logoBtn" href="javascript:void(0)">
+      <span class="logo-icon">⌨</span>
+      <span class="logo-text">Typing<em>Speed</em></span>
+    </a>
+
+    <nav class="nav" id="mainNav">
+      <button class="nav-btn is-active" data-page="home">Home</button>
+      <button class="nav-btn" data-page="practice">Practice</button>
+      <button class="nav-btn" data-page="statistics">Statistics</button>
+      <button class="nav-btn" data-page="settings">Settings</button>
+    </nav>
+
+    <button class="icon-btn" id="themeToggle" title="Theme" aria-label="Theme">🌙</button>
+  </div>
+</header>
+
+<main class="main">
+
+  <!-- HOME -->
+  <section class="page is-active" id="page-home">
+    <div class="hero">
+      <span class="badge">⌨ Professional Typing Test</span>
+      <h1>Test Your <span class="grad">Typing Speed</span></h1>
+      <p class="hero-sub">
+        Real vaqt rejimida WPM, aniqlik va xatolarni kuzatib boring.
+        Vaqt va murakkablikni tanlang, so‘ng <b>Start Test</b> tugmasini bosing.
+      </p>
+      <div class="best-chip" id="homeBestWpm">🏆 Best WPM: <b>0</b></div>
     </div>
 
+    <div class="panel config-panel">
+      <div class="config-group">
+        <h3 class="config-title">Time</h3>
+        <div class="chips" id="timeChips">
+          <button class="chip is-active" data-time="15">15 sec</button>
+          <button class="chip" data-time="30">30 sec</button>
+          <button class="chip" data-time="60">60 sec</button>
+        </div>
+      </div>
 
-    <!-- Toast -->
-    <div class="toast" id="toast">
-        <span id="toastIcon">✓</span>
-        <span id="toastMessage">Saved successfully</span>
+      <div class="config-group">
+        <h3 class="config-title">Difficulty</h3>
+        <div class="chips" id="diffChips">
+          <button class="chip is-active" data-diff="easy">Easy</button>
+          <button class="chip" data-diff="medium">Medium</button>
+          <button class="chip" data-diff="hard">Hard</button>
+        </div>
+      </div>
+
+      <button class="btn btn-primary btn-lg" id="startBtn">Start Test</button>
+
+      <p class="hint">
+        Shortcuts: <kbd>Esc</kbd> pauza &nbsp;•&nbsp; <kbd>Ctrl</kbd>+<kbd>Enter</kbd> qayta boshlash
+        &nbsp;•&nbsp; <kbd>Tab</kbd> yangi matn
+      </p>
+    </div>
+  </section>
+
+  <!-- PRACTICE -->
+  <section class="page" id="page-practice">
+    <div class="stats-bar">
+      <div class="stat stat-accent">
+        <span class="stat-label">WPM</span>
+        <span class="stat-value" id="statWpm">0</span>
+      </div>
+      <div class="stat">
+        <span class="stat-label">Accuracy</span>
+        <span class="stat-value" id="statAcc">100%</span>
+      </div>
+      <div class="stat">
+        <span class="stat-label">Errors</span>
+        <span class="stat-value" id="statErr">0</span>
+      </div>
+      <div class="stat">
+        <span class="stat-label">Time</span>
+        <span class="stat-value" id="statTime">60s</span>
+      </div>
     </div>
 
+    <div class="progress-wrap">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
 
-    <script src="script.js"></script>
+    <!-- MUHIM: input endi typing-card ICHIDA turadi -->
+    <div class="typing-card" id="typingCard">
+      <div class="typing-text" id="typingText"></div>
 
+      <div class="typing-overlay" id="typingOverlay">
+        <span id="overlayText">Yozish uchun bosing</span>
+      </div>
+
+      <input id="hiddenInput"
+             class="hidden-input"
+             type="text"
+             inputmode="text"
+             enterkeyhint="done"
+             autocomplete="off"
+             autocorrect="off"
+             autocapitalize="off"
+             spellcheck="false"
+             aria-label="Typing input">
+    </div>
+
+    <div class="practice-actions">
+      <button class="btn btn-ghost" id="pauseBtn">Pause</button>
+      <button class="btn btn-ghost" id="restartBtn">Restart</button>
+      <button class="btn btn-ghost" id="newTextBtn">New Text</button>
+      <button class="btn btn-ghost" id="homeBtn2">Back to Home</button>
+    </div>
+
+    <p class="mobile-tip" id="mobileTip">
+      📱 Telefonda: matn ustiga bosing — klaviatura ochiladi va yozishni boshlang.
+    </p>
+  </section>
+
+  <!-- STATISTICS -->
+  <section class="page" id="page-statistics">
+    <h2 class="page-title">Statistics</h2>
+    <p class="page-sub">Barcha natijalar brauzeringizda (<b>localStorage</b>) saqlanadi.</p>
+
+    <div class="cards" id="statCards"></div>
+
+    <div class="table-card">
+      <div class="table-head">
+        <h3>Recent Tests</h3>
+        <button class="btn btn-danger btn-sm" id="clearHistoryBtn">Clear History</button>
+      </div>
+      <div class="table-scroll">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>WPM</th>
+              <th>Accuracy</th>
+              <th>Errors</th>
+              <th>Time</th>
+              <th>Difficulty</th>
+            </tr>
+          </thead>
+          <tbody id="historyBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- SETTINGS -->
+  <section class="page" id="page-settings">
+    <h2 class="page-title">Settings</h2>
+    <p class="page-sub">Sozlamalar avtomatik saqlanadi.</p>
+
+    <div class="settings-list">
+      <div class="setting-row">
+        <div class="setting-info">
+          <div class="setting-name">Theme</div>
+          <div class="setting-desc">Dark yoki Light rejimni tanlang</div>
+        </div>
+        <div class="chips chips-sm" id="themeChips">
+          <button class="chip" data-theme-set="dark">🌙 Dark</button>
+          <button class="chip" data-theme-set="light">☀️ Light</button>
+        </div>
+      </div>
+
+      <div class="setting-row">
+        <div class="setting-info">
+          <div class="setting-name">Sound</div>
+          <div class="setting-desc">Yozish paytida yengil ovoz effektlari</div>
+        </div>
+        <button class="switch" id="soundSwitch" role="switch" aria-checked="true" aria-label="Sound">
+          <span class="knob"></span>
+        </button>
+      </div>
+
+      <div class="setting-row">
+        <div class="setting-info">
+          <div class="setting-name">Ma’lumotlarni tozalash</div>
+          <div class="setting-desc">Barcha statistika va natijalar tarixini o‘chiradi</div>
+        </div>
+        <button class="btn btn-danger" id="resetStatsBtn">Reset Stats</button>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <span>Typing Speed — HTML + CSS + Vanilla JavaScript</span>
+</footer>
+
+<div class="modal-overlay" id="resultModal">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="record-badge" id="recordBadge">🏆 New Personal Record!</div>
+
+    <h2 class="modal-title" id="modalTitle">Your Result</h2>
+
+    <div class="result-hero">
+      <div class="result-wpm" id="resWpm">0</div>
+      <div class="result-wpm-label">WPM</div>
+    </div>
+
+    <div class="result-grid">
+      <div class="res-item"><span>Accuracy</span><b id="resAcc">0%</b></div>
+      <div class="res-item"><span>Errors</span><b id="resErr">0</b></div>
+      <div class="res-item"><span>Correct Characters</span><b id="resCorrect">0</b></div>
+      <div class="res-item"><span>Total Characters</span><b id="resTotal">0</b></div>
+      <div class="res-item"><span>Time</span><b id="resTime">0 sec</b></div>
+      <div class="res-item"><span>Difficulty</span><b id="resDiff">Easy</b></div>
+    </div>
+
+    <div class="modal-actions">
+      <button class="btn btn-primary" id="tryAgainBtn">Try Again</button>
+      <button class="btn btn-ghost" id="newTestBtn">New Test</button>
+      <button class="btn btn-ghost" id="backHomeBtn">Back to Home</button>
+    </div>
+  </div>
+</div>
+
+<div class="countdown" id="countdown">
+  <span id="countdownNum">3</span>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="script.js"></script>
 </body>
 </html>
